@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<h2 class="mb-4">📊 Student Dashboard</h2>
+
+<!-- Tip of the Day -->
+<div class="alert alert-info">💡 Tip of the Day: {{ tip }}</div>
+
+<div class="alert alert-success py-2 px-3">
+  🟢 You are logged in - Welcome back!
+</div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-info">{{ messages[0] }}</div>
+  {% endif %}
+{% endwith %}
+
+<!-- Night Mode Toggle -->
+<div class="form-check form-switch mb-3">
+  <input class="form-check-input" type="checkbox" id="darkModeToggle">
+  <label class="form-check-label" for="darkModeToggle">🌙 Dark Mode</label>
+</div>
+
+<div class="mb-3 d-flex flex-wrap gap-2">
+  <form action="{{ url_for('import_excel') }}" method="post">
+    <button type="submit" class="btn btn-primary">↻ Import Excel</button>
+  </form>
+  <form action="{{ url_for('save_to_excel') }}" method="post" class="d-inline">
+    <button class="btn btn-success">📎 Save</button>
+  </form>
+  <form action="{{ url_for('clear_data') }}" method="post" onsubmit="return confirm('Are you sure?');">
+    <button type="submit" class="btn btn-danger">🗑️ Clear All</button>
+  </form>
+  <form action="{{ url_for('dashboard') }}" method="get" class="d-flex gap-2">
+    <input name="query" value="{{ query or '' }}" class="form-control" placeholder="Search name">
+    <button type="submit" class="btn btn-secondary">🔍</button>
+  </form>
+  <div class="dropdown">
+    <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      Filter by Subject
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{{ url_for('dashboard', sort='math', order='desc') }}">Math</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('dashboard', sort='english', order='desc') }}">English</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('dashboard', sort='science', order='desc') }}">Science</a></li>
+    </ul>
+  </div>
+  <div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      Export by Subject
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{{ url_for('export_by_subject', subject='math') }}">Math</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('export_by_subject', subject='english') }}">English</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('export_by_subject', subject='science') }}">Science</a></li>
+    </ul>
+  </div>
+  <a href="{{ url_for('export_excel') }}" class="btn btn-outline-success">📈 Excel</a>
+  <a href="{{ url_for('export_pdf') }}" class="btn btn-outline-danger">📄 PDF</a>
+  <a href="{{ url_for('logout') }}" class="btn btn-outline-dark">🚪 Logout</a>
+  <a href="{{ url_for('send_email_form') }}" class="btn btn-outline-info">📧 Send Email</a>
+  <a href="{{ url_for('view_logs') }}" class="btn btn-outline-warning">🗾️ View Logs</a>
+
+</div>
+
+<p class="text-muted">👥 Total: {{ students|length }} | 🕒 Last update: {{ last_updated }}</p>
+{% if top_student %}
+<p class="text-success">🏆 Top Student: {{ top_student.name }} ({{ top_student.total }})</p>
+{% endif %}
+{% if low_student %}
+<p class="text-danger">😥 Lowest: {{ low_student.name }} ({{ low_student.total }})</p>
+{% endif %}
+
+<!-- Add Student Form -->
+<button class="btn btn-success mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#addStudentForm">
+  ➕ Add Student
+</button>
+<div class="collapse mb-4" id="addStudentForm">
+  <form action="{{ url_for('add_student') }}" method="post" enctype="multipart/form-data" class="d-flex flex-wrap gap-2">
+    <input name="name" class="form-control" placeholder="Name" required>
+    <input name="math" type="number" class="form-control" placeholder="Math" required>
+    <input name="english" type="number" class="form-control" placeholder="English" required>
+    <input name="science" type="number" class="form-control" placeholder="Science" required>
+    <input name="address" class="form-control" placeholder="Address" required>
+    <input type="file" name="avatar" accept="image/*" class="form-control">
+    <button type="submit" class="btn btn-primary">✔️ Save</button>
+  </form>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th class="sticky-header">#</th>
+        <th class="sticky-header">Avatar</th>
+        {% for col, label in [('name', 'Name'), ('math', 'Math'), ('english', 'English'), ('science', 'Science'), ('address', 'Address'), ('line_code', 'Line Code')] %}
+        <th class="sticky-header">
+          <a href="{{ url_for('dashboard', sort=col, order='desc' if sort_by==col and order=='asc' else 'asc') }}" class="text-white text-decoration-none">
+            {{ label }}
+            {% if sort_by == col %}{{ '⬆️' if order == 'asc' else '⬇️' }}{% endif %}
+          </a>
+        </th>
+        {% endfor %}
+        <th class="sticky-header">Total</th>
+        <th class="sticky-header">QR</th>
+        <th class="sticky-header">Edit</th>
+        <th class="sticky-header">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+      {% set total = student.math + student.english + student.science %}
+      {% set color_class = 'high' if total >= 270 else 'medium' if total >= 200 else 'low' %}
+      <tr class="{{ color_class }}">
+        <td>{{ loop.index }}</td>
+        <td><img src="{{ student.avatar_url or url_for('static', filename='img/default_avatar.png') }}" width="40" height="40" class="rounded-circle"></td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.math }}</td>
+        <td>{{ student.english }}</td>
+        <td>{{ student.science }}</td>
+        <td>{{ student.address }}</td>
+        <td>{{ student.line_code }}</td>
+        <td>{{ total }}</td>
+        <td><a href="{{ url_for('generate_qr', line_code=student.line_code) }}" target="_blank" class="btn btn-sm btn-outline-dark">QR</a></td>
+        <td><a href="{{ url_for('edit_student', student_id=student.id) }}" class="btn btn-sm btn-warning">✏️</a></td>
+        <td>
+          <form method="post" action="{{ url_for('delete_student', student_id=student.id) }}" onsubmit="return confirm('Delete this student?');">
+            <button class="btn btn-sm btn-danger">🗑️</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+document.getElementById('darkModeToggle').addEventListener('change', function() {
+  document.body.classList.toggle('bg-dark');
+  document.body.classList.toggle('text-white');
+});
+</script>
+
+{% endblock %}

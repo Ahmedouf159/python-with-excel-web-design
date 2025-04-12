@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}🎮 Challenge Mode{% endblock %}
+{% block content %}
+
+<div class="container my-4">
+  <h2 class="mb-4 text-primary">🎮 Challenge Mode</h2>
+
+  <p class="lead">Solve the question below:</p>
+
+  <form method="POST" action="{{ url_for('challenge_mode') }}">
+    <div class="mb-3">
+      <label class="form-label fw-bold">What is 5 + 7?</label>
+      <input type="number" name="answer" class="form-control w-50" placeholder="Enter your answer" required>
+    </div>
+    <button type="submit" class="btn btn-success">✔️ Submit</button>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary ms-2">⬅ Back</a>
+  </form>
+
+  {% if result %}
+    {% if result == 'correct' %}
+      <div class="alert alert-success mt-4">✅ Correct! Great job! 🎉</div>
+    {% else %}
+      <div class="alert alert-danger mt-4">❌ Wrong answer. Try again!</div>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,401 @@
+/* 🌙 Dark Mode Toggle */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+  
+  body.dark-mode .table th,
+  body.dark-mode .table td {
+    color: #e0e0e0;
+  }
+  
+  body.dark-mode .btn {
+    border-color: #ccc;
+    color: #fff;
+  }
+  
+  .dark-toggle {
+    cursor: pointer;
+    font-size: 18px;
+    float: right;
+    margin-top: 5px;
+  }
+  
+  /* 🎨 Colors based on scores */
+  .score-high {
+    background-color: #d4edda !important;
+  }
+  
+  .score-medium {
+    background-color: #fff3cd !important;
+  }
+  
+  .score-low {
+    background-color: #f8d7da !important;
+  }
+  
+  /* 📌 Sticky header */
+  .sticky-header th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 2;
+    text-align: center;
+  }
+  
+  /* ✨ Table styles */
+  .table th, .table td {
+    vertical-align: middle !important;
+    text-align: center;
+  }
+  
+  /* ✅ Logged in status */
+  .status-indicator {
+    font-weight: bold;
+    color: green;
+    margin-bottom: 10px;
+  }
+  
+  /* 🔍 Dropdown styling */
+  .filter-dropdown {
+    margin-bottom: 15px;
+  }
+  
+  /* 🧾 Logs styling */
+  .log-entry {
+    font-family: monospace;
+    padding: 4px 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  /* Buttons margin */
+  .btn {
+    margin-bottom: 5px;
+  }
+  
+  /* QR preview image */
+  .qr-preview {
+    width: 80px;
+    height: auto;
+  }/* 🌙 Dark Mode Toggle */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .table th,
+body.dark-mode .table td {
+  color: #e0e0e0;
+}
+
+body.dark-mode .btn {
+  border-color: #ccc;
+  color: #fff;
+}
+
+.dark-toggle {
+  cursor: pointer;
+  font-size: 18px;
+  float: right;
+  margin-top: 5px;
+}
+
+/* 🎨 Colors based on scores */
+.score-high {
+  background-color: #d4edda !important;
+}
+
+.score-medium {
+  background-color: #fff3cd !important;
+}
+
+.score-low {
+  background-color: #f8d7da !important;
+}
+
+/* 📌 Sticky header */
+.sticky-header th {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 2;
+  text-align: center;
+}
+
+/* ✨ Table styles */
+.table th, .table td {
+  vertical-align: middle !important;
+  text-align: center;
+}
+
+/* ✅ Logged in status */
+.status-indicator {
+  font-weight: bold;
+  color: green;
+  margin-bottom: 10px;
+}
+
+/* 🔍 Dropdown styling */
+.filter-dropdown {
+  margin-bottom: 15px;
+}
+
+/* 🧾 Logs styling */
+.log-entry {
+  font-family: monospace;
+  padding: 4px 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Buttons margin */
+.btn {
+  margin-bottom: 5px;
+}
+
+/* QR preview image */
+.qr-preview {
+  width: 80px;
+  height: auto;
+}
+/* 🌐 General Enhancements */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f6f9;
+    color: #333;
+    padding-bottom: 50px;
+  }
+  
+  /* 🌙 Dark Mode */
+  body.dark-mode {
+    background-color: #181818;
+    color: #f1f1f1;
+  }
+  body.dark-mode .table,
+  body.dark-mode .btn,
+  body.dark-mode input,
+  body.dark-mode select {
+    background-color: #333;
+    color: #fff;
+    border-color: #444;
+  }
+  .dark-toggle {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+  }
+  
+  /* 🧮 Score Colors */
+  .score-high {
+    background-color: #c8e6c9 !important;
+  }
+  .score-medium {
+    background-color: #fff9c4 !important;
+  }
+  .score-low {
+    background-color: #ffcdd2 !important;
+  }
+  
+  /* 📌 Sticky Table Header */
+  .table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #e9ecef;
+    z-index: 10;
+  }
+  
+  /* 🖱️ Hover Effects */
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  body.dark-mode .table tbody tr:hover {
+    background-color: #2c2c2c;
+  }
+  
+  /* 🎨 Buttons and Inputs */
+  .btn {
+    transition: all 0.3s ease;
+  }
+  .btn:hover {
+    transform: scale(1.03);
+  }
+  input, select {
+    border-radius: 5px !important;
+    padding: 6px 10px;
+  }
+  
+  /* 🔍 Filters and Status */
+  .filter-dropdown {
+    margin: 10px 0;
+  }
+  .status-indicator {
+    font-weight: bold;
+    color: green;
+  }
+  
+  /* 🧾 Logs Display */
+  .log-entry {
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    font-family: monospace;
+  }
+  body.dark-mode .log-entry {
+    background: #2a2a2a;
+    border-color: #66afe9;
+    color: #ccc;
+  }
+  
+  /* 🖼️ QR Code Image */
+  .qr-preview {
+    width: 70px;
+    height: auto;
+    border: 1px solid #ccc;
+  }
+  /* 🌍 Global Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  padding: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+body.dark-mode {
+  background: #121212;
+  color: #f0f0f0;
+}
+
+/* 📌 Sticky Header */
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+  text-align: center;
+  border-bottom: 2px solid #dee2e6;
+}
+body.dark-mode .table thead th {
+  background: #1e1e1e;
+}
+
+/* 🎨 Grade Coloring */
+td.grade {
+  font-weight: bold;
+}
+td.grade.high {
+  background-color: #c8e6c9;
+}
+td.grade.medium {
+  background-color: #fff9c4;
+}
+td.grade.low {
+  background-color: #ffcdd2;
+}
+
+/* ✨ Button Effects */
+.btn {
+  border-radius: 6px;
+  padding: 8px 15px;
+  transition: all 0.25s ease-in-out;
+}
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* 🌙 Dark Mode Toggle */
+.dark-toggle {
+  cursor: pointer;
+  padding: 6px 10px;
+  background: #343a40;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  float: right;
+}
+body.dark-mode .dark-toggle {
+  background: #f8f9fa;
+  color: #000;
+}
+
+/* 🔍 Search Input */
+.search-bar {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 250px;
+}
+body.dark-mode .search-bar {
+  background: #2e2e2e;
+  color: white;
+  border: 1px solid #555;
+}
+
+/* 📧 Email Form */
+.email-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+body.dark-mode .email-form {
+  background: #1f1f1f;
+}
+
+/* 🧾 Logs */
+.log-entry {
+  padding: 6px 10px;
+  margin: 4px 0;
+  background: #f1f1f1;
+  border-left: 4px solid #007bff;
+}
+body.dark-mode .log-entry {
+  background: #2b2b2b;
+  color: #ccc;
+}
+
+/* 🎓 Student Cards */
+.student-card {
+  padding: 15px;
+  border-radius: 10px;
+  margin: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: #ffffff;
+}
+body.dark-mode .student-card {
+  background: #1a1a1a;
+  box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f9;
+  transition: background 0.5s, color 0.5s;
+}
+
+.bg-dark {
+  background-color: #121212 !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.high {
+  background-color: #c8e6c9;
+}
+.medium {
+  background-color: #fff9c4;
+}
+.low {
+  background-color: #ffcdd2;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #343a40;
+  z-index: 100;
+}

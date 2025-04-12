@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+  <div class="card p-4 shadow" style="min-width: 300px;">
+    <h4 class="mb-3 text-center">🔒 Control Panel Login</h4>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-danger">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+    <form method="post" action="{{ url_for('login') }}">
+      <div class="mb-3">
+        <label for="secret_key" class="form-label">Secret Code</label>
+        <input type="password" name="secret_key" id="secret_key" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
